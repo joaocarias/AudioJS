@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <p>
+        <input class="form-control meu-input" type="text" />
+
+        <a href="#" class="btn btn-dark meu-audio">Meu Audio</a>
+
+    </p>
+</div>
+
+@section Scripts{
+    <script>
+
+        $('.meu-audio').on("click", function () {
+
+            var input = $(".meu-input").val();
+            console.log(input);
+            $.get("/Home/ObterAudio/", {
+                msg: input
+            }).done(function (response) {
+                var audio = new Audio("data:audio/wav;base64," + response.arquivo);
+                audio.play();
+            }).fail(function (response) {
+                console.error(response);
+            });
+
+            console.log("Teste");
+        });
+
+
+    </script>
+
+}
